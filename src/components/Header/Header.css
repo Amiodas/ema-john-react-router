@@ -1,0 +1,16 @@
+.Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: rgb(40, 40, 102);
+    position: fixed;
+    top: 0;
+    width: calc(100% - 80px);
+}
+
+.nav-item {
+    margin: 20px;
+    color: #fff;
+}
