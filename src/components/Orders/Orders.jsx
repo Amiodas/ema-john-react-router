@@ -4,16 +4,16 @@ import "./Orders.css";
 import { Link, useLoaderData } from "react-router-dom";
 import {
   deleteShoppingCart,
-  getCartFromDb,
   removeFromDb,
 } from "../../utilities/fakedb";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
 const Orders = () => {
   const savedCart = useLoaderData();
   const [cart, setCart] = useState(savedCart);
   const handleDeleteItem = (id) => {
-    const remaining = cart.filter((product) => product.id !== id);
+    const remaining = cart.filter((product) => product._id !== id);
     setCart(remaining);
     removeFromDb(id);
   };
@@ -21,22 +21,22 @@ const Orders = () => {
     setCart([]);
     deleteShoppingCart();
   };
-  console.log(cart);
   return (
     <div>
       <div className="orders-container">
         {cart.map((item) => (
-          <div className="order-item" key={item.id}>
+          <div className="order-item" key={item._id}>
             <div className="order-item-body">
               <img src={item.img} alt="" />
               <div>
                 <h4 className="order-title">{item.name}</h4>
                 <p>Price: ${item.price}</p>
+                <p>Quantity: {item.quantity}</p>
                 <p>Shipping Charge: ${item.shipping}</p>
               </div>
             </div>
             <div className="order-btn">
-              <button onClick={() => handleDeleteItem(item.id)}>
+              <button onClick={() => handleDeleteItem(item._id)}>
                 <FontAwesomeIcon icon={faTrashCan} />
               </button>
             </div>
